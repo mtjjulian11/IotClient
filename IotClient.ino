@@ -1,4 +1,5 @@
-  // let see if this is working
+  // This code stablish connectio with the ThingSpeak API, ennables to write data 
+  // comming from the accelerometer of the Arduino Nana IoT.
    
 #include "ThingSpeak.h"
 #include <WiFiNINA.h>
@@ -73,34 +74,15 @@ void loop() {
     Serial.print(',');
     Serial.println(z*100);
   }
-  // set the fields with the values
-//  ThingSpeak.setField(1, number1);
+  
+// set the fields with the values
+
   ThingSpeak.setField(1, x*100);
   ThingSpeak.setField(2, y*100);
   ThingSpeak.setField(3, z*100);
 
-  // figure out the status message
-  //if(number1 > x){
-//    myStatus = String("field1 is greater than field2"); 
-//  }
-//  else if(number1 < x){
-//    myStatus = String("field1 is less than field2");
-//  }
-//  else{
-//    myStatus = String("field1 equals field2");
-//  }
-//  
-//  // set the status
-//  ThingSpeak.setStatus(myStatus);
-  
-  // write to the ThingSpeak channel
+ 
  ThingSpeak.writeFields(readChannelNumber, myWriteAPIKey);
-//  if(x >0){
-//    Serial.println("Channel update successful.");
-//  }
-//  else{
-//    Serial.println("Problem updating channel. HTTP error code " + String(x));
-//  }
   
-    delay(3000); // Wait 3 seconds to update the channel again
+ delay(3000); // Wait 3 seconds to update the channel again
 }
