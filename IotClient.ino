@@ -21,6 +21,7 @@ float y;
 float z;
 
 
+
 void setup() {
   Serial.begin(115200);  // Initialize serial
 
@@ -68,21 +69,23 @@ void loop() {
   if (IMU.accelerationAvailable()) {
     IMU.readAcceleration(x, y, z);
 
-    Serial.print(x);
+    Serial.print(x*10);
     Serial.print(',');
-    Serial.print(y);
+    Serial.print(y*10);
     Serial.print(',');
-    Serial.println(z);
+    Serial.println(z*10);
   }
   
 // set the fields with the values
 
-  ThingSpeak.setField(1, x);
-  ThingSpeak.setField(2, y);
-  ThingSpeak.setField(3, z);
+  ThingSpeak.setField(1, x*10);
+  ThingSpeak.setField(2, y*10);
+  ThingSpeak.setField(3, z*10);
 
  
  ThingSpeak.writeFields(writeChannelNumber, myWriteAPIKey);
   
- delay(3000); // Wait 3 seconds to update the channel again
+  delay(15000); // Wait 3 seconds to update the channel again
+
+
 }
