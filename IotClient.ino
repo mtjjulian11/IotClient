@@ -1,4 +1,4 @@
-  // This code stablish connectio with the ThingSpeak API, ennables to write data 
+  // This code stablish connection with the ThingSpeak API, ennables to write data 
   // comming from the accelerometer of the Arduino Nana IoT.
    
 #include "ThingSpeak.h"
@@ -11,7 +11,7 @@ char pass[] = SECRET_PASS;   // your network password
 int keyIndex = 0;            // your network key Index number (needed only for WEP)
 WiFiClient  client;
 
-unsigned long readChannelNumber = SECRET_CH_ID;
+unsigned long writeChannelNumber = SECRET_CH_ID;
 const char * myWriteAPIKey = SECRET_WRITE_APIKEY;
 
 // Initialize our values
@@ -68,21 +68,21 @@ void loop() {
   if (IMU.accelerationAvailable()) {
     IMU.readAcceleration(x, y, z);
 
-    Serial.print(x*100);
+    Serial.print(x);
     Serial.print(',');
-    Serial.print(y*100);
+    Serial.print(y);
     Serial.print(',');
-    Serial.println(z*100);
+    Serial.println(z);
   }
   
 // set the fields with the values
 
-  ThingSpeak.setField(1, x*100);
-  ThingSpeak.setField(2, y*100);
-  ThingSpeak.setField(3, z*100);
+  ThingSpeak.setField(1, x);
+  ThingSpeak.setField(2, y);
+  ThingSpeak.setField(3, z);
 
  
- ThingSpeak.writeFields(readChannelNumber, myWriteAPIKey);
+ ThingSpeak.writeFields(writeChannelNumber, myWriteAPIKey);
   
  delay(3000); // Wait 3 seconds to update the channel again
 }
